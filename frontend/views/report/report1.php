@@ -1,6 +1,7 @@
 <?php
 
 use kartik\grid\GridView;
+use yii\helpers\Html;
 
 $this->params['breadcrumbs'][] = ['label' => 'รายงาน', 'url' => ['report/index']];
 $this->params['breadcrumbs'][] = 'รายงานนับถือศาสนา';
@@ -12,29 +13,30 @@ echo GridView::widget([
         'before' => 'รายงานนับถือศาสนา',
         'after' => 'ประมวลผล ณ ' . date('Y-m-d H:i:s')
     ],
-    'columns'=>[
-        ['class'=>'yii\grid\SerialColumn'],
-        
-        ['attribute'=>'hoscode',
-        'label'=>'รหัสสถานบริการ',
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        ['attribute' => 'hoscode',
+            'header' => 'รหัสสถานบริการ',
         ],
-        
-        ['attribute'=>'hosname',
-        'label'=>'หน่วยบริการ',
+        ['attribute' => 'hosname',
+            'header' => 'หน่วยบริการ',
+            'format'=>'raw',
+            'value'=>function($model){
+                $hoscode=$model['hoscode'];
+                $hosname=$model['hosname'];
+                return Html::a(Html::encode($hosname),['report/report3','hoscode'=>$hoscode]);
+    
+            }
         ],
-        
-         ['attribute'=>'total',
-        'label'=>'ประชากรทั้งหมด(คน)',
+        ['attribute' => 'total',
+            'header' => 'ประชากรทั้งหมด(คน)',
         ],
-        
-        ['attribute'=>'buddha',
-        'label'=>'ศาสนาพุทธ (คน)',
+        ['attribute' => 'buddha',
+            'header' => 'ศาสนาพุทธ (คน)',
         ],
-        
-        ['attribute'=>'other',
-        'label'=>'ศาสนาพุทธ (คน)',
+        ['attribute' => 'other',
+            'header' => 'ศาสนาพุทธ (คน)',
         ],
     ],
-    
 ])
 ?>
