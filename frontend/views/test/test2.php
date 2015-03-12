@@ -1,5 +1,3 @@
- 
- <?php 
- 
-        echo "Your name is $name";
-  ?>
+<?php
+echo $info;
+?>

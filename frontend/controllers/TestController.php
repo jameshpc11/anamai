@@ -13,18 +13,20 @@ class TestController extends \yii\web\Controller {
         $a = 3;
         $b = 5;
         $sum = $a + $b;
-
-        $param=['sum'=>$sum,'a'=>$a,'b'=>$b];
         
-        return $this->render('test1', $param);
-    } // end test1
+        $param = ['sum' => $sum,'a'=>$a,'bb'=>$b];
 
+        return $this->render('test1',$param );
+    }// จบ test1
     
-     public  function actionTest2($name=null){
+    
+     public function actionTest2($name=null,$lname=null) {
          
-         //echo "Your name is $name";
-         
-         return $this->render('test2',['name'=>$name]);
+         $info =  "Your name is $name $lname";
+         return $this->render('test2',['info'=>$info]);
          
      }
+    
+    
+
 }

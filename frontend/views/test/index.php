@@ -2,10 +2,6 @@
 /* @var $this yii\web\View */
 ?>
 <h1>test/index</h1>
+ggggggggggggggggggggggggggggghhhhhh
 
-
-
-<p>
-    ทดสอบ
-    the file <code><?= __FILE__; ?></code>.
-</p>
+jjjjjjjjjj
