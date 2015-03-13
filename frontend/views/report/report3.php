@@ -15,3 +15,7 @@ echo GridView::widget([
     ]
 ])
 ?>
+
+<div class="alert-danger">
+    <code><?=$sql?></code>
+</div>

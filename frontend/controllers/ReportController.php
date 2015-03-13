@@ -38,7 +38,8 @@ class ReportController extends \yii\web\Controller {
         ]);
 
         return $this->render('report1', [
-                    'dataProvider' => $dataProvider
+                    'dataProvider' => $dataProvider,
+                    'rawData'=>$rawData
         ]);
     }
     
@@ -58,7 +59,8 @@ class ReportController extends \yii\web\Controller {
         ]);
 
         return $this->render('report3', [
-                    'dataProvider' => $dataProvider
+                    'dataProvider' => $dataProvider,
+                    'sql'=>$sql
         ]);
     }
  
