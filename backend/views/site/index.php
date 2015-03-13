@@ -16,37 +16,39 @@ $this->title = 'My Yii Application';
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            
+            <div class="col-sm-4">
+                <a href="<?=yii::$app->urlManager->createUrl('user')?>" class="btn btn-danger">จัดการ user</a>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            
+            <div class="col-sm-4">
+                <button id="btn_rpt" href="" class="btn btn-danger">ประมวลผลรายงาน</button>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
+         
+       </div>
+        
+        
+         <div id="show"></div>
 </div>
+    
+    
+      <?php
+    $route_exec = yii::$app->urlManager->createUrl('processreport/exec');
+    
+    $script1 = <<< JS
+            
+    $('#btn_rpt').on('click', function(e) {                
+    
+    $('#show').html('กำลังประมวลผล...');          
+    $.ajax({
+       url: "$route_exec",       
+       success: function(data) {
+             $('#show').html('');                
+            alert(data+' สำเร็จ');            
+       }
+    });
+});
+JS;
+    $this->registerJs($script1);
+    
+    ?>

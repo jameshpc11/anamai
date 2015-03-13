@@ -15,19 +15,30 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+   public function behaviors() {
+        $role = isset(Yii::$app->user->identity->role) ? Yii::$app->user->identity->role : 99;
+        $arr = array();
+        if ($role == 1) {
+            $arr = ['login', 'logout', 'index', 'error'];
+        } else {
+            $arr = ['logout', 'login', 'error'];
+        }
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => \yii\filters\AccessControl::className(),
+                'denyCallback' => function ($rule, $action) {
+                    throw new \yii\web\ForbiddenHttpException("ไม่ได้รับอนุญาต");
+                },
+                'only' => ['login', 'logout', 'index', 'error'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
+                        'allow' => TRUE,
+                        'actions' => $arr,
+                        'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
+                        'allow' => TRUE,
+                        'actions' => $arr,
                         'roles' => ['@'],
                     ],
                 ],
@@ -40,6 +51,7 @@ class SiteController extends Controller
             ],
         ];
     }
+
 
     /**
      * @inheritdoc
